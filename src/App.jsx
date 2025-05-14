@@ -9,9 +9,6 @@ import {
   Share2,
   ChevronRight,
 } from "lucide-react";
-
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
@@ -20,7 +17,7 @@ function App() {
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
-    if (e) e.preventDefault();
+    e?.preventDefault();
 
     if (!email.trim()) {
       setError("Please enter your email");
@@ -32,11 +29,42 @@ function App() {
       return;
     }
 
-    // In a real app, you would send this to your backend
     console.log("Email submitted:", email);
     setSubmitted(true);
     setError("");
   };
+
+  const EmailForm = ({ ctaLabel = "Join the Waitlist" }) =>
+    !submitted ? (
+      <div className="space-y-4 max-w-md">
+        <div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email address"
+            className="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          {error && <p className="text-red-300 mt-1">{error}</p>}
+        </div>
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition flex items-center justify-center"
+        >
+          {ctaLabel}
+          <ChevronRight className="ml-2 w-5 h-5" />
+        </button>
+      </div>
+    ) : (
+      <div className="bg-green-600 text-white p-4 rounded-lg max-w-md">
+        <div className="flex items-center">
+          <CheckCircle className="w-6 h-6 mr-2" />
+          <p className="font-semibold">
+            You're on the list! We'll notify you when JabNGo launches.
+          </p>
+        </div>
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
@@ -50,12 +78,12 @@ function App() {
             </div>
             <button
               className="px-4 py-2 bg-white text-blue-600 rounded-md font-semibold hover:bg-blue-50 transition"
-              onClick={() => {
+              onClick={() =>
                 window.scrollTo({
                   top: document.documentElement.scrollHeight,
                   behavior: "smooth",
-                });
-              }}
+                })
+              }
             >
               Join Waitlist
             </button>
@@ -70,38 +98,7 @@ function App() {
                 Connect with local fighters who match your weight class,
                 experience level, and training goals.
               </p>
-
-              {!submitted ? (
-                <div className="space-y-4 max-w-md">
-                  <div>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email address"
-                      className="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    {error && <p className="text-red-300 mt-1">{error}</p>}
-                  </div>
-                  <button
-                    onClick={handleSubmit}
-                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition flex items-center justify-center"
-                  >
-                    Join the Waitlist
-                    <ChevronRight className="ml-2 w-5 h-5" />
-                  </button>
-                </div>
-              ) : (
-                <div className="bg-green-600 text-white p-4 rounded-lg max-w-md">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 mr-2" />
-                    <p className="font-semibold">
-                      You're on the list! We'll notify you when JabNGo launches.
-                    </p>
-                  </div>
-                </div>
-              )}
-
+              <EmailForm />
               <p className="text-sm mt-4 text-blue-200">
                 Launching in 2 months. Be the first to know!
               </p>
@@ -127,37 +124,31 @@ function App() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-              <Users className="w-6 h-6 text-blue-600" />
+          {[
+            {
+              icon: <Users className="w-6 h-6 text-blue-600" />,
+              title: "Match by Experience",
+              desc: "Connect with fighters at your skill level for productive, safe training sessions.",
+            },
+            {
+              icon: <Map className="w-6 h-6 text-blue-600" />,
+              title: "Local Partners",
+              desc: "Find nearby fighters to minimize travel time and maximize training.",
+            },
+            {
+              icon: <Shield className="w-6 h-6 text-blue-600" />,
+              title: "Verified Profiles",
+              desc: "Train with confidence knowing all users are verified fighters.",
+            },
+          ].map(({ icon, title, desc }, i) => (
+            <div key={i} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                {icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-2">{title}</h3>
+              <p className="text-gray-600">{desc}</p>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Match by Experience</h3>
-            <p className="text-gray-600">
-              Connect with fighters at your skill level for productive, safe
-              training sessions.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-              <Map className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Local Partners</h3>
-            <p className="text-gray-600">
-              Find nearby fighters to minimize travel time and maximize
-              training.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-              <Shield className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Verified Profiles</h3>
-            <p className="text-gray-600">
-              Train with confidence knowing all users are verified fighters.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -167,95 +158,76 @@ function App() {
           <h2 className="text-3xl font-bold text-center mb-12">
             How JabNGo Works
           </h2>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold">1</span>
+          <div className="grid md:grid-cols-4 gap-6 text-center">
+            {[
+              {
+                step: "1",
+                title: "Create Profile",
+                desc: "Enter your weight class, experience level, and training goals.",
+              },
+              {
+                step: "2",
+                title: "Browse Matches",
+                desc: "View fighters in your area who match your criteria.",
+              },
+              {
+                step: "3",
+                title: "Connect",
+                desc: "Message potential partners and arrange a sparring session.",
+              },
+              {
+                step: "4",
+                title: "Train & Review",
+                desc: "After training, leave feedback to help the community.",
+              },
+            ].map(({ step, title, desc }, i) => (
+              <div key={i}>
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+                  {step}
+                </div>
+                <h3 className="font-semibold mb-2">{title}</h3>
+                <p className="text-gray-600 text-sm">{desc}</p>
               </div>
-              <h3 className="font-semibold mb-2">Create Profile</h3>
-              <p className="text-gray-600 text-sm">
-                Enter your weight class, experience level, and training goals.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold">2</span>
-              </div>
-              <h3 className="font-semibold mb-2">Browse Matches</h3>
-              <p className="text-gray-600 text-sm">
-                View fighters in your area who match your criteria.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold">3</span>
-              </div>
-              <h3 className="font-semibold mb-2">Connect</h3>
-              <p className="text-gray-600 text-sm">
-                Message potential partners and arrange a sparring session.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold">4</span>
-              </div>
-              <h3 className="font-semibold mb-2">Train & Review</h3>
-              <p className="text-gray-600 text-sm">
-                After training, leave feedback to help the community.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       <section className="py-16 max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
           What Beta Users Are Saying
         </h2>
-
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
-              <div>
-                <h4 className="font-semibold">Mike T.</h4>
-                <p className="text-sm text-gray-500">
-                  Amateur Boxer, 3 years experience
-                </p>
+          {[
+            {
+              name: "Mike T.",
+              role: "Amateur Boxer, 3 years experience",
+              quote:
+                "I was struggling to find consistent sparring partners at my gym. JabNGo connected me with three regular partners who've helped take my skills to the next level.",
+            },
+            {
+              name: "Sarah K.",
+              role: "Kickboxer, 5 years experience",
+              quote:
+                "As a female fighter, finding appropriate sparring partners was always challenging. JabNGo made it easy to connect with other women at my weight class and skill level.",
+            },
+          ].map(({ name, role, quote }, i) => (
+            <div key={i} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 rounded-full mr-4" />
+                <div>
+                  <h4 className="font-semibold">{name}</h4>
+                  <p className="text-sm text-gray-500">{role}</p>
+                </div>
               </div>
+              <p className="text-gray-600">"{quote}"</p>
             </div>
-            <p className="text-gray-600">
-              "I was struggling to find consistent sparring partners at my gym.
-              JabNGo connected me with three regular partners who've helped take
-              my skills to the next level."
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
-              <div>
-                <h4 className="font-semibold">Sarah K.</h4>
-                <p className="text-sm text-gray-500">
-                  Kickboxer, 5 years experience
-                </p>
-              </div>
-            </div>
-            <p className="text-gray-600">
-              "As a female fighter, finding appropriate sparring partners was
-              always challenging. JabNGo made it easy to connect with other
-              women at my weight class and skill level."
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Final CTA */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">
@@ -265,36 +237,7 @@ function App() {
             Join the waitlist today and be among the first fighters to
             experience JabNGo when we launch in 2 months.
           </p>
-
-          {!submitted ? (
-            <div className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none"
-                />
-                <button
-                  onClick={handleSubmit}
-                  className="bg-yellow-500 hover:bg-yellow-400 text-gray-800 font-bold py-3 px-6 rounded-lg transition"
-                >
-                  Join Now
-                </button>
-              </div>
-              {error && <p className="text-red-300 mt-1 text-left">{error}</p>}
-            </div>
-          ) : (
-            <div className="bg-green-600 text-white p-4 rounded-lg max-w-md mx-auto">
-              <div className="flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 mr-2" />
-                <p className="font-semibold">
-                  You're on the list! We'll notify you when JabNGo launches.
-                </p>
-              </div>
-            </div>
-          )}
+          <EmailForm ctaLabel="Join Now" />
         </div>
       </section>
 
@@ -306,28 +249,19 @@ function App() {
               <Dumbbell className="w-6 h-6" />
               <span className="text-xl font-bold">JabNGo</span>
             </div>
-
             <div className="flex space-x-6">
-              <a href="#" className="hover:text-blue-400 transition">
-                <span className="sr-only">Twitter</span>
-                <Share2 className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                <span className="sr-only">Instagram</span>
-                <Share2 className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                <span className="sr-only">Facebook</span>
-                <Share2 className="w-6 h-6" />
-              </a>
+              {["Twitter", "Instagram", "Facebook"].map((platform, i) => (
+                <a key={i} href="#" className="hover:text-blue-400 transition">
+                  <span className="sr-only">{platform}</span>
+                  <Share2 className="w-6 h-6" />
+                </a>
+              ))}
             </div>
           </div>
-
           <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} JabNGo. All rights reserved.
             </p>
-
             <div className="flex space-x-6 text-sm text-gray-400">
               <a href="#" className="hover:text-white transition">
                 Privacy Policy
