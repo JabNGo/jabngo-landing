@@ -107,7 +107,7 @@ function App() {
             <div className="md:w-5/12">
               <div className="bg-blue-500 p-6 rounded-lg shadow-xl">
                 <img
-                  src="/src/assets/jabngo-preview-2.png"
+                  src="https://res.cloudinary.com/da59lovov/image/upload/f_auto,q_auto,w_800/v1747326360/jabngo-preview-2_mebsrt.png"
                   alt="JabNGo app preview"
                   className="w-full rounded-md shadow-lg"
                 />
