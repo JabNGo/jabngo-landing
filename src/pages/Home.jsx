@@ -235,12 +235,12 @@ export default function Home() {
               <Link to="/privacy-policy" className="hover:text-[#ED3B20]">
                 Privacy Policy
               </Link>
-              <a href="terms" className="hover:text-[#ED3B20]">
+              <Link to="/terms" className="hover:text-[#ED3B20]">
                 Terms of Service
-              </a>
-              <a href="contact" className="hover:text-[#ED3B20]">
+              </Link>
+              <Link to="/contact" className="hover:text-[#ED3B20]">
                 Contact
-              </a>
+              </Link>
             </div>
             {/* <div className="flex space-x-6 text-sm">
               {["Privacy Policy", "Terms of Service", "Contact"].map(
