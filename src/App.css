@@ -1,8 +1,51 @@
 @import "tailwindcss";
 
-#root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto;
-  padding: 2rem;
-  text-align: center; */
+/* ---- JabNGo Brand Palette ----------------------------------- */
+:root {
+  --cream: #f8fad8;
+  --primary: #e31b24;
+  --royal: #214d8b;
+  --gold: #ffb613;
+  --fight-green: #004c31;
+  --coal: #242324;
+}
+
+/* Utility classes (mimic Tailwind naming) */
+.bg-cream {
+  background-color: var(--cream);
+}
+.text-cream {
+  color: var(--cream);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+.text-primary {
+  color: var(--primary);
+}
+
+.bg-coal {
+  background-color: var(--coal);
+}
+.text-coal {
+  color: var(--coal);
+}
+
+.border-coal {
+  border-color: var(--coal);
+}
+.border-cream {
+  border-color: var(--cream);
+}
+.border-primary {
+  border-color: var(--primary);
+}
+
+/* Hover helpers */
+.hover\:bg-primary-dark:hover {
+  background-color: #c61a1f;
+}
+.hover\:text-primary:hover {
+  color: var(--primary);
 }

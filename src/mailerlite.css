@@ -1,0 +1,80 @@
+/* ========== MailerLite Styling Enhancements ========== */
+
+.ml-form-embedWrapper {
+  border: 2px solid var(--coal) !important;
+  padding: 1.5rem !important;
+  border-radius: 0 !important;
+  background-color: var(--cream) !important;
+  box-shadow: none !important;
+
+  /* background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important; */
+  font-family: "Open Sans", sans-serif !important;
+  color: var(--coal) !important;
+  max-width: 100% !important;
+}
+
+/* Headline */
+.ml-form-embedWrapper h4 {
+  font-family: "Anton", sans-serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 900 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Subtitle */
+.ml-form-embedWrapper .ml-form-description {
+  font-size: 0.9rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Inputs */
+.ml-form-embedWrapper input[type="email"],
+.ml-form-embedWrapper input[type="text"] {
+  border: 2px solid var(--coal) !important;
+  border-radius: 0 !important;
+  padding: 0.75rem !important;
+  width: 100% !important;
+  background-color: white !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Radios */
+.ml-form-embedWrapper input[type="radio"] {
+  margin-right: 0.4rem !important;
+}
+.ml-form-embedWrapper .radio label {
+  margin-right: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* Checkbox container */
+.ml-form-embedPermissions {
+  font-size: 0.85rem !important;
+  margin: 1rem 0 0.5rem !important;
+}
+
+/* reCAPTCHA */
+.ml-form-embedWrapper .g-recaptcha {
+  margin: 1rem 0 !important;
+}
+
+/* Submit Button */
+.ml-form-embedWrapper button,
+.ml-form-embedWrapper .ml-button {
+  background-color: var(--primary) !important;
+  color: var(--cream) !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  border: none !important;
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.ml-form-embedWrapper .ml-button:hover {
+  background-color: #333 !important;
+}
