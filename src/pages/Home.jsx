@@ -697,7 +697,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Users, Map, Shield, Share2, ChevronRight } from "lucide-react";
 import "../App.css"; // your palette + global styles
-import "../mailerlite.css";
+import "../mailerlite.css"
 import Footer from "../components/Footer";
 
 export default function Home() {
